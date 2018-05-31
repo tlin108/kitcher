@@ -6,28 +6,40 @@ import {
 	Picker
 } from 'react-native'
 
-import map from 'lodash/map'
+import MeasurementPicker from './MeasurementPicker'
 
 const measurementDic = {
 	teaSpoon: {
-		label: 'Tea Spoon',
 		teaSpoon: 1,
 		tableSpoon: (1 / 3),
 		cup: ( 1 / 48 )
 	},
 	tableSpoon: {
-		label: 'Table Spoon',
 		teaSpoon: 3,
 		tableSpoon: 1,
 		cup: (1 / 16)
 	},
 	cup: {
-		label: 'Cup',
 		teaSpoon: 48,
 		tableSpoon: 16,
 		cup: 1
 	}
 }
+
+const measurement = [
+	{
+		label: 'Tea Spoon',
+		value: 'teaSpoon'
+	},
+	{
+		label: 'Table Spoon',
+		value: 'tableSpoon'
+	},
+	{
+		label: 'Cup',
+		value: 'cup'
+	}
+] 
 
 export default class App extends React.Component {
 	state = {
@@ -41,17 +53,15 @@ export default class App extends React.Component {
 		return (
 			<View style={ styles.container }>
 				<View>
-					<Picker
+					<MeasurementPicker
 						selectedValue={ from }
-						style={{ height: 100, width: 200 }}
-						onValueChange={itemValue => this.setState({ from: itemValue })}>
-						{ map(measurementDic, (val, key) => (
-							<Picker.Item key={ key } value={ key } label={ measurementDic[key].label } />
-						))}
-					</Picker>
+						onValueChange={ value => this.setState({ from: value })}
+						options={ measurement }
+						skin={ skin.pickerSkin }/>
 					<Picker
 						selectedValue={ quantity }
-						style={{ height: 50, width: 100 }}
+						style={[ styles.picker, { height: 88, width: 125 } ]}
+						itemStyle={{ height: 88 }}
 						onValueChange={itemValue => this.setState({ quantity: itemValue })}>
 						<Picker.Item label="1" value={ 1 } />
 						<Picker.Item label="2" value={ 2 } />
@@ -65,14 +75,11 @@ export default class App extends React.Component {
 				</View>
 				<View>
 					<Text style={{ textAlign: 'center', fontSize: 24 }}>{ convert(quantity, measurementDic[from][to]) }</Text>
-					<Picker
+					<MeasurementPicker
 						selectedValue={ to }
-						style={{ height: 100, width: 200 }}
-						onValueChange={itemValue => this.setState({ to: itemValue })}>
-						{ map(measurementDic, (val, key) => (
-							<Picker.Item key={ key } value={ key } label={ measurementDic[key].label } />
-						))}
-					</Picker>
+						onValueChange={ value => this.setState({ to: value })}
+						options={ measurement }
+						skin={ skin.pickerSkin }/>
 				</View>
 			</View>
 		)
@@ -86,6 +93,18 @@ function convert (quantity, measurement) {
 	) : (
 		result.toFixed(2)
 	)
+}
+
+const skin = {
+	pickerSkin: {
+		style: {
+			height: 110,
+			width: 250
+		},
+		itemStyle: {
+			height: 110
+		}
+	}
 }
 
 const styles = StyleSheet.create({
