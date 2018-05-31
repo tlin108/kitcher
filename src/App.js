@@ -6,14 +6,26 @@ import {
 	Picker
 } from 'react-native'
 
-const measurementDictionary = {
-	tableSpoon: {
-		teaSpoon: 3,
-		tableSpoon: 1
-	},
+import map from 'lodash/map'
+
+const measurementDic = {
 	teaSpoon: {
-		tableSpoon: 0.33,
-		teaSpoon: 1
+		label: 'Tea Spoon',
+		teaSpoon: 1,
+		tableSpoon: (1 / 3),
+		cup: ( 1 / 48 )
+	},
+	tableSpoon: {
+		label: 'Table Spoon',
+		teaSpoon: 3,
+		tableSpoon: 1,
+		cup: (1 / 16)
+	},
+	cup: {
+		label: 'Cup',
+		teaSpoon: 48,
+		tableSpoon: 16,
+		cup: 1
 	}
 }
 
@@ -33,8 +45,9 @@ export default class App extends React.Component {
 						selectedValue={ from }
 						style={{ height: 100, width: 200 }}
 						onValueChange={itemValue => this.setState({ from: itemValue })}>
-						<Picker.Item label='Table Spoon' value='tableSpoon' />
-						<Picker.Item label='Tea Spoon' value='teaSpoon' />
+						{ map(measurementDic, (val, key) => (
+							<Picker.Item key={ key } value={ key } label={ measurementDic[key].label } />
+						))}
 					</Picker>
 					<Picker
 						selectedValue={ quantity }
@@ -51,18 +64,28 @@ export default class App extends React.Component {
 					</Picker>
 				</View>
 				<View>
-					<Text style={{ textAlign: 'center' }}>{ quantity * measurementDictionary[from][to] }</Text>
+					<Text style={{ textAlign: 'center', fontSize: 24 }}>{ convert(quantity, measurementDic[from][to]) }</Text>
 					<Picker
 						selectedValue={ to }
 						style={{ height: 100, width: 200 }}
 						onValueChange={itemValue => this.setState({ to: itemValue })}>
-						<Picker.Item label='Table Spoon' value='tableSpoon' />
-						<Picker.Item label='Tea Spoon' value='teaSpoon' />
+						{ map(measurementDic, (val, key) => (
+							<Picker.Item key={ key } value={ key } label={ measurementDic[key].label } />
+						))}
 					</Picker>
 				</View>
 			</View>
 		)
 	}
+}
+
+function convert (quantity, measurement) {
+	const result = (quantity * measurement)
+	return (result % 1 === 0) ? (
+		result
+	) : (
+		result.toFixed(2)
+	)
 }
 
 const styles = StyleSheet.create({
