@@ -195,7 +195,13 @@ export default class App extends React.Component {
 					</View>
 				</View>
 				<View>
-					<Text style={{ textAlign: 'center', fontSize: 48 }}>{ convert(quantity + fraction , measurementDic[from][to]) }</Text>
+					<View style={{ alignItems: 'center' }}>
+						<View style={ skin.resultContainerStyle} >
+							<Text style={ skin.resultTextStyle }>
+								{ convert(quantity + fraction , measurementDic[from][to]) }
+							</Text>
+						</View>
+					</View>
 					<Picker
 						selectedValue={ to }
 						onValueChange={ value => this.setState({ to: value })}
@@ -240,5 +246,15 @@ const skin = {
 		itemStyle: {
 			height: 88
 		}
+	},
+	resultContainerStyle: {
+		borderStyle: 'solid',
+		borderRadius: 10,
+		backgroundColor: '#ffdd99'
+	},
+	resultTextStyle: {
+		textAlign: 'center',
+		width: 150, 
+		fontSize: 48
 	}
 }
