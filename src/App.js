@@ -11,6 +11,7 @@ import {
 	wholeQuantity,
 	fractionQuantity
 } from './metadata/measurement'
+import convert from './utils/convert'
 
 export default class App extends React.Component {
 	state = {
@@ -58,15 +59,6 @@ export default class App extends React.Component {
 			</View>
 		)
 	}
-}
-
-function convert (quantity, measurement) {
-	const result = (quantity * measurement)
-	return (result % 1 === 0) ? (
-		result
-	) : (
-		result.toFixed(2)
-	)
 }
 
 const skin = {

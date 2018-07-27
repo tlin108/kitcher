@@ -6,11 +6,18 @@ import {
 } from 'react-native'
 
 export default ({ value, unit }) => {
+	const [ whole, fraction ] = value.split(' ')
+
 	return (
 		<View style={{ alignItems: 'center' }}>
 			<View style={ baseSkin.resultContainerStyle} >
 				<Text style={ baseSkin.resultTextStyle }>
-					{ value }&nbsp;
+					{ whole }&nbsp;
+					{ fraction && (
+						<Text style={ baseSkin.fractionStyle }>
+							{ fraction }
+						</Text> 
+					)}&nbsp;
 					<Text style={ baseSkin.unitTextStyle }>
 						{ unit }
 					</Text>
@@ -32,6 +39,9 @@ const baseSkin = StyleSheet.create({
 		textAlign: 'center',
 		width: 330, 
 		fontSize: 100
+	},
+	fractionStyle: {
+		fontSize: 40
 	},
 	unitTextStyle: {
 		fontSize: 56
