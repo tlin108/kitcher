@@ -59,27 +59,27 @@ const measurementDic = {
 
 const measurement = [
 	{
-		label: 'Tea Spoon',
+		label: 'Tea Spoons',
 		value: 'teaSpoon'
 	},
 	{
-		label: 'Table Spoon',
+		label: 'Table Spoons',
 		value: 'tableSpoon'
 	},
 	{
-		label: 'Cup',
+		label: 'Cups',
 		value: 'cup'
 	},
 	{
-		label: 'Fluid Ounce',
+		label: 'Fluid Ounces',
 		value: 'fluidOunce'
 	},
 	{
-		label: 'Pint',
+		label: 'Pints',
 		value: 'pint'
 	},
 	{
-		label: 'Quart',
+		label: 'Quarts',
 		value: 'quart'
 	}
 ]
@@ -133,7 +133,7 @@ const wholeQuantity = [
 
 const fractionQuantity = [
 	{
-		label: '',
+		label: '-/-',
 		value: 0
 	},
 	{
@@ -176,11 +176,6 @@ export default class App extends React.Component {
 		return (
 			<View style={ skin.style }>
 				<View>
-					<Picker
-						selectedValue={ from }
-						onValueChange={ value => this.setState({ from: value })}
-						options={ measurement }
-						skin={ skin.measurementPickerSkin }/>
 					<View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
 						<Picker
 							selectedValue={ quantity }
@@ -193,7 +188,13 @@ export default class App extends React.Component {
 							options={ fractionQuantity }
 							skin={ skin.quantityPickerSkin }/>
 					</View>
+					<Picker
+						selectedValue={ from }
+						onValueChange={ value => this.setState({ from: value })}
+						options={ measurement }
+						skin={ skin.measurementPickerSkin }/>
 				</View>
+				<Hr />
 				<View>
 					<View style={{ alignItems: 'center' }}>
 						<View style={ skin.resultContainerStyle} >
@@ -213,6 +214,16 @@ export default class App extends React.Component {
 	}
 }
 
+const Hr = () => {
+	return (
+		<View style={{
+			borderBottomColor: '#cccccc',
+			borderBottomWidth: 1,
+			width: 330
+		}}/>
+	)
+}
+
 function convert (quantity, measurement) {
 	const result = (quantity * measurement)
 	return (result % 1 === 0) ? (
@@ -225,36 +236,42 @@ function convert (quantity, measurement) {
 const skin = {
 	style: {
 		flex: 1,
-		backgroundColor: '#fff',
+		backgroundColor: '#f2f2f2',
 		alignItems: 'center',
 		justifyContent: 'space-around'
 	},
 	measurementPickerSkin: {
 		style: {
-			height: 110,
-			width: 250
+			height: 150,
+			width: 330,
+			backgroundColor: '#fff'
 		},
 		itemStyle: {
-			height: 110
+			height: 150,
+			fontSize: 40
 		}
 	},
 	quantityPickerSkin: {
 		style: {
-			height: 88,
-			width: 120
+			height: 100,
+			width: 160,
+			backgroundColor: '#fff'
 		},
 		itemStyle: {
-			height: 88
+			height: 100,
+			fontSize: 40
 		}
 	},
 	resultContainerStyle: {
+		width: 330,
+		alignItems: 'center',
 		borderStyle: 'solid',
 		borderRadius: 10,
 		backgroundColor: '#ffdd99'
 	},
 	resultTextStyle: {
 		textAlign: 'center',
-		width: 150, 
-		fontSize: 48
+		width: 330, 
+		fontSize: 100
 	}
 }

@@ -12,16 +12,16 @@ export default function ({ selectedValue, onValueChange, options, skin }) {
 			itemStyle={ skin && skin.itemStyle }
 			onValueChange={ onValueChange }>
 			{ options.map(({ label, value }) => (
-				<Picker.Item key={ value } value={ value } label={ label } />
+				<Picker.Item key={ value } value={ value } label={ label }/>
 			))}
 		</Picker>
 	)
 }
-
+    
 const baseSkin = StyleSheet.create({
 	style: {
 		borderWidth: 1,
-		borderRadius: 2,
+		borderRadius: 5,
 		borderColor: '#ddd',
 		shadowColor: '#000',
 		shadowOffset: {
