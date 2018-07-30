@@ -74,24 +74,24 @@ const skin = {
 	},
 	measurementPickerSkin: {
 		style: {
-			height: 200,
-			width: 330,
+			height: 150,
+			width: 280,
 			backgroundColor: '#fff'
 		},
 		itemStyle: {
-			height: 200,
-			fontSize: 40
+			height: 150,
+			fontSize: 30
 		}
 	},
 	quantityPickerSkin: {
 		style: {
-			height: 100,
-			width: 160,
+			height: 80,
+			width: 130,
 			backgroundColor: '#fff'
 		},
 		itemStyle: {
-			height: 100,
-			fontSize: 40
+			height: 80,
+			fontSize: 30
 		}
 	}
 }

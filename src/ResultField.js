@@ -29,7 +29,7 @@ export default ({ value, unit }) => {
 
 const baseSkin = StyleSheet.create({
 	resultContainerStyle: {
-		width: 330,
+		width: 280,
 		alignItems: 'center',
 		borderStyle: 'solid',
 		borderRadius: 10,
@@ -37,13 +37,13 @@ const baseSkin = StyleSheet.create({
 	},
 	resultTextStyle: {
 		textAlign: 'center',
-		width: 330, 
-		fontSize: 100
+		width: 280, 
+		fontSize: 80
 	},
 	fractionStyle: {
-		fontSize: 40
+		fontSize: 30
 	},
 	unitTextStyle: {
-		fontSize: 56
+		fontSize: 36
 	}
 })
